@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+
+bashio::log.info "Uruchamiam MeshMonitor..."
+
+cd /opt/meshmonitor
+
+# Uruchom serwer produkcyjny (Express + skompilowany frontend)
+exec node dist/server/index.js

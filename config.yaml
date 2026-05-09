@@ -1,0 +1,50 @@
+name: "MeshMonitor"
+description: "Web application for monitoring Meshtastic mesh networks over IP. Runs the latest Yeraze/meshmonitor from GitHub Container Registry."
+version: "1.0.0"
+slug: "meshmonitor"
+init: false
+homeassistant_api: false
+hassio_api: false
+auth_api: false
+ingress: true
+ingress_port: 3001
+ingress_stream: false
+panel_icon: "mdi:radio-tower"
+panel_title: "MeshMonitor"
+
+map:
+  - share:rw
+
+ports:
+  3001/tcp: 8099
+
+ports_description:
+  3001/tcp: "MeshMonitor Web UI"
+
+options:
+  meshtastic_node_ip: "192.168.1.100"
+  meshtastic_node_port: 4403
+  admin_password: "changeme"
+  ha_url: "http://homeassistant.local:8099"
+  log_level: "info"
+  timezone: "Europe/Warsaw"
+  session_secret: ""
+  auto_upgrade: false
+
+schema:
+  meshtastic_node_ip: str
+  meshtastic_node_port: int
+  admin_password: str
+  ha_url: str
+  log_level: list(debug|info|warn|error)
+  timezone: str
+  session_secret: str
+  auto_upgrade: bool
+
+image: "ghcr.io/yeraze/meshmonitor:{arch}"
+
+# Obsługiwane architektury (MeshMonitor ma obrazy dla wszystkich trzech)
+arch:
+  - amd64
+  - aarch64
+  - armv7
